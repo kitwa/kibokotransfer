@@ -1,0 +1,4 @@
+{
+    "dotnet.defaultSolution": "kibokotransfer.sln",
+    "svn.ignoreMissingSvnWarning": true
+}

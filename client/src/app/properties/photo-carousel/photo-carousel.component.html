@@ -1,0 +1,230 @@
+<div *ngIf="!loading" >
+
+
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-info">
+
+        <h1 class="display-6 pb-2">Find your dream home with our smart search</h1>
+        <div class="container pb-2">
+            <form [formGroup]='searchForm' (ngSubmit)="searchForm.valid && searchProperty()" autocomplete="off">
+
+                <!-- <div class="row">
+                    <div class="col-lg-9"> -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="city" class="form-label">Location</label>
+                                <select
+                                    [class.is-invalid]='searchForm.get("city")?.errors && searchForm.get("city")?.touched'
+                                    class="form-control search-slt" formControlName='city'>
+                                    <option value="lubumbashi">lubumbashi</option>
+                                    <option value="kinshasa">Kinshasa</option>
+                                    <option value="goma">goma</option>
+                                    <option value="kolwezi">kolwezi</option>
+                                    <option value="bukavu">bukavu</option>
+                                </select>
+                                <div class="invalid-feedback">Location is required</div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="maxPrice" class="form-label">Property Type</label>
+
+                                <select
+                                    [class.is-invalid]='searchForm.get("propertyType")?.errors && searchForm.get("propertyType")?.touched'
+                                    formControlName='propertyType' class="form-control search-slt"
+                                    class="form-control search-slt">
+                                    <option value="house">House</option>
+                                    <option value="apartement">Apartment/Flat</option>
+                                    <option value="land">Vacant Land</option>
+                                    <option value="commercial">Commercial Property</option>
+                                    <option value="industrial">Industrial Property</option>
+                                </select>
+                                <div class="invalid-feedback">PropertyType is required</div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="bedRooms" class="form-label">Bedrooms</label>
+                                <select formControlName='bedRooms' class="form-control search-slt">
+                                    <option value="0">0+</option>
+                                    <option value="1">1+</option>
+                                    <option value="2">2+</option>
+                                    <option value="3">3+</option>
+                                    <option value="4">4+</option>
+                                    <option value="5">5+</option>
+                                    <option value="6">6+</option>
+                                    <option value="7">7+</option>
+                                    <option value="8">8+</option>
+                                    <option value="9">9+</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="minPrice" class="form-label">Min Price</label>
+                                <select class="form-control search-slt" formControlName='minPrice'>
+                                    <option value="10000">$ 10 000</option>
+                                    <option value="100000">$ 100 000</option>
+                                    <option value="200000">$ 200 000</option>
+                                    <option value="300000">$ 300 000</option>
+                                    <option value="400000">$ 400 000</option>
+                                    <option value="500000">$ 500 000</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="maxPrice" class="form-label">Max Price</label>
+                                <select class="form-control search-slt" formControlName='maxPrice'>
+                                    <option value="100000">$ 100 000</option>
+                                    <option value="200000">$ 200 000</option>
+                                    <option value="300000">$ 300 000</option>
+                                    <option value="400000">$ 400 000</option>
+                                    <option value="500000">$ 500 000</option>
+                                    <option value="100000000">$ 100 000 000</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <label for="bathRooms" class="form-label">Bathrooms</label>
+                                <select formControlName='bathRooms' class="form-control search-slt">
+                                    <option value="0">0+</option>
+                                    <option value="1">1+</option>
+                                    <option value="2">2+</option>
+                                    <option value="3">3+</option>
+                                    <option value="4">4+</option>
+                                    <option value="5">5+</option>
+                                    <option value="6">6+</option>
+                                    <option value="7">7+</option>
+                                    <option value="8">8+</option>
+                                    <option value="9">9+</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 pt-2">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <button [disabled]='!searchForm.valid' type="submit" name="submit" id="submit"
+                                    class="btn btn-success wrn-btn">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <!-- <div class="col-lg-3 pt-2">
+                        <img src="./assets/girl.jpg" class="img-fluid" alt="photo">
+                    </div>
+                </div> -->
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="properties.length > 0 && searchClicked == true">
+        <div class="col-sm-12 " *ngFor="let property of properties">
+            <app-property-card [property]="property"></app-property-card>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="properties.length == 0 && searchClicked == true">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="text-dark">0 Properties Found </h3>
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title">No property has much your search criterias</h5>
+                    <p class="card-text">If you want to sell your property or guide on how to buy on our plateform,
+                        contact us below.</p>
+                    <a href="tel:+27813516105" class="btn btn-primary">+27 81 35 16 105 </a> or
+                    <a href="mailto:info@kibokohouse.com" class="btn btn-primary">info@kibokohouse.com </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center pt-5" *ngIf="properties.length > 1 && searchClicked == true">
+        <pagination [boundaryLinks]="true" [itemsPerPage]="pagination.itemsPerPage" [totalItems]="pagination.totalItems"
+            [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+
+        </pagination>
+    </div>
+
+
+        <!-- <div class="row" *ngIf="properties.length > 0 && searchClicked != true">
+        <div class="col-sm-12 p-3 text-center">
+            <h4 class="fw-light">Recently published</h4>
+
+        </div>
+        <div class="col-sm-6 " >
+            <app-property-card [property]="property"></app-property-card>
+        </div>
+    </div> -->
+
+<div class="row" *ngIf="properties.length > 0 && searchClicked != true">
+    <app-transactions [properties]="properties"></app-transactions>
+</div>
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+    
+          <!-- <div class="col-12 col-md">
+            <img class="mb-2" src="./assets/h2.png" alt="" width="150" height="120">
+            <small class="d-block mb-3 text-muted">Kiboko House &copy; 2021-2022</small>
+          </div> -->
+          <div class="col-6">
+            <h5>Download Apps</h5>
+            <p>Get the app on your Android or Apple device. </p>
+            <a href="#" class="animated fadeInUp pe-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/badges/gray-app-store.svg" alt="Available on the App Store"  id="applestorefooter" ></a>
+            <a href="#" class="animated fadeInUp" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><img src="https://don16obqbay2c.cloudfront.net/wp-content/themes/ecwid/images/badges/gray-google.svg" alt="Get it on Google play"  id="googlestorefooter" ></a>
+            <small class="d-block mb-3 text-muted pt-2">Kiboko House &copy; 2021-2022</small>
+          </div>
+    
+          <div class="col-3">
+            <h5>Links</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Home</a></li>
+              <li><a class="text-muted" href="#">Properties</a></li>
+              <li><a class="text-muted" href="#">Real Estate</a></li>
+              <li><a class="text-muted" href="#">Final resource</a></li>
+            </ul>
+          </div>
+          <div class="col-3  ">
+            <h5>Social</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#"><i class="bi bi-youtube text-danger pe-2"></i>Youtube</a></li>
+              <li><a class="text-muted" href="#"><i class="bi bi-linkedin text-primary pe-2"></i>LinkedIn</a></li>
+              <li><a class="text-muted" href="#"><i class="bi bi-instagram text-warning pe-2"></i>Instagram</a></li>
+              <li><a class="text-muted" href="#"><i class="bi bi-facebook text-primary pe-2"></i>Facebook</a></li>
+            </ul>
+          </div>
+    
+        </div>
+      </footer>
+    
+    
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-dark" id="exampleModalCenterTitle">Kiboko House Online Store Apps.</h5>
+            </div>
+            <div class="modal-body fw-light">
+            Kiboko House new apps will be available on Android and iOS. Come back and check us later.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+</div>

@@ -1,0 +1,130 @@
+<div class="row" *ngIf="property">
+    <div class="col-12 pb-3">
+        <h3>Edit Property</h3>
+    </div>
+
+    <div class="alert alert-info col-6 text-center" *ngIf="editForm.dirty" role="alert">
+      <p>You have made changes. Any unsaved changes will be lost.</p>
+    </div>
+    <div class="col-12">
+      <app-photo-editor [property]="property"></app-photo-editor>
+    </div>
+    <div class="col-12 pb-5">
+    <form [formGroup]='editForm'  (ngSubmit)="updateProperty()" class="row g-3">
+
+      <div class="col-md-6">
+        <label for="price"  class="form-label">Price</label>
+        <input type="text" 
+        [class.is-invalid]='editForm.get("price")?.errors && editForm.get("price")?.touched'
+        class="form-control" id="price" formControlName='price' placeholder="price"  [(ngModel)]="property.price">
+        <div class="invalid-feedback">Please enter a price.</div>
+    </div>
+
+      <div class="col-md-6">
+        <label for="bedRooms" class="form-label">Bedrooms</label>
+        <select [class.is-invalid]='editForm.get("bedRooms")?.errors && editForm.get("bedRooms")?.touched' 
+        formControlName='bedRooms'  [(ngModel)]="property.bedRooms" class="form-select">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <div class="invalid-feedback">Please choose the number of bedrooms.</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="bathRooms" class="form-label">Bathrooms</label>
+        <select  [class.is-invalid]='editForm.get("bathRooms")?.errors && editForm.get("bathRooms")?.touched' 
+        [(ngModel)]="property.bathRooms" formControlName='bathRooms' class="form-select">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <div class="invalid-feedback">Please choose the number of bathrooms.</div>
+      </div>
+
+      <div class="col-md-6">
+          <label for="garage" class="form-label">garages</label>
+          <select [class.is-invalid]='editForm.get("garage")?.errors && editForm.get("garage")?.touched' 
+          [(ngModel)]="property.garage" formControlName='garage' class="form-select">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          <div class="invalid-feedback">Please choose the number of garages.</div>
+        </div>
+
+        
+      <div class="col-md-6">
+          <label for="propertyType" class="form-label">Property Type</label>
+          <select [class.is-invalid]='editForm.get("propertyType")?.errors && editForm.get("propertyType")?.touched' 
+          [(ngModel)]="property.propertyType" formControlName='propertyType' class="form-select">
+            <option value="house">House</option>
+            <option value="apartement">Apartment/Flat</option>
+            <option value="land">Vacant Land</option>
+            <option value="commercial">Commercial Property</option>
+            <option value="industrial">Industrial Property</option>
+          </select>
+          <div class="invalid-feedback">Please choose a property type.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="city"  class="form-label">City</label>
+          <select [class.is-invalid]='editForm.get("city")?.errors && editForm.get("city")?.touched' 
+          [(ngModel)]="property.city" formControlName='city' class="form-select">
+            <option value="lubumbashi">lubumbashi</option>
+            <option value="kinshasa">Kinshasa</option>
+            <option value="goma">goma</option>
+            <option value="kolwezi">kolwezi</option>
+            <option value="likasi">likasi</option>
+            <option value="bukavu">bukavu</option>
+          </select>
+            <div class="invalid-feedback">Please enter a city.</div>
+        </div>
+
+        <div class="col-6">
+          <label for="country"  class="form-label">Country</label> 
+          <!-- <input type="text" [(ngModel)]="property.country"  class="form-control" formControlName='country' rows="5" placeholder="country"> -->
+          <select [class.is-invalid]='editForm.get("country")?.errors && editForm.get("country")?.touched' 
+          [(ngModel)]="property.country" formControlName='country' class="form-select">
+            <option value="drcongo">Depublic democratic of Congo</option>
+
+          </select>
+            <div class="invalid-feedback">Please enter a city.</div>
+        </div>
+
+        <div class="col-md-12">
+          <label for="description"  class="form-label">Description</label>
+          <textarea 
+          [class.is-invalid]='editForm.get("description")?.errors && editForm.get("description")?.touched' 
+          class="form-control" [(ngModel)]="property.description"  formControlName='description' rows="5" placeholder="description"></textarea>
+        </div>
+
+        <div class="col-md-6">
+          <label for="youtubeLink"  class="form-label">Youtube Video</label>
+          <input type="text" 
+          [class.is-invalid]='editForm.get("youtubeLink")?.errors && editForm.get("youtubeLink")?.touched'
+          class="form-control" [(ngModel)]="property.youtubeLink" formControlName='youtubeLink' placeholder="youtubeLink">
+          <div class="invalid-feedback">Enter a youtube link.</div>
+      </div>
+
+        <div class="col-12">
+          <button type="submit" [disabled]="!editForm.dirty" name="submit" id="submit" class="btn btn-primary ">Save Changes</button>
+        </div>
+      </form>
+      </div>
+
+    </div>
+
