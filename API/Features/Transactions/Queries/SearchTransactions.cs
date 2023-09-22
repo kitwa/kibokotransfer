@@ -39,6 +39,7 @@ namespace API.Features.Transactions.Queries
                 .Where(x => x.SenderCityId == query.SearchTransactionDto.SenderCityId 
                         || x.RecipientCityId == query.SearchTransactionDto.RecipientCityId
                         || x.StatusId == query.SearchTransactionDto.StatusId 
+                        || x.SenderName == query.SearchTransactionDto.SenderName
                         || x.RecipientName == query.SearchTransactionDto.RecipientName
                         || x.Code == query.SearchTransactionDto.Code)
                 .OrderBy(x => x.Created);

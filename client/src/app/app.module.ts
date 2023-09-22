@@ -38,6 +38,8 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
+import { TransactionAddComponent } from './transactions/transaction-add/transaction-add.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { TransactionsComponent } from './transactions/transactions.component';
     HasRoleDirective,
     UserManagementComponent,
     RolesModalComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    TransactionListComponent,
+    TransactionAddComponent
   ],
   imports: [
     BrowserModule,

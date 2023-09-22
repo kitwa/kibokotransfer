@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-12">
+        <p>Add Transaction</p>
+    </div>
+
+    <div class="col-12 pb-5">
+    <form [formGroup]='addForm' (ngSubmit)="addTransaction()" autocomplete="off"  class="row g-3">
+
+        <div class="col-md-6">
+            <label for="sentAmount"  class="form-label">Montant A Envoyer</label>
+            <input type="text" 
+            [class.is-invalid]='addForm.get("sentAmount")?.errors && addForm.get("sentAmount")?.touched'
+            class="form-control" id="sentAmount" formControlName="sentAmount" placeholder="sentAmount">
+            <div class="invalid-feedback">Please enter a sentAmount.</div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="profit"  class="form-label">Profit</label>
+            <input type="text" 
+            [class.is-invalid]='addForm.get("profit")?.errors && addForm.get("profit")?.touched'
+            class="form-control" id="profit" formControlName="profit" placeholder="profit">
+            <div class="invalid-feedback">Please enter a profit.</div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="totalAmount"  class="form-label">Montant Total</label>
+            <input type="text" 
+            [class.is-invalid]='addForm.get("totalAmount")?.errors && addForm.get("totalAmount")?.touched'
+            class="form-control" id="totalAmount" formControlName="totalAmount" placeholder="totalAmount">
+            <div class="invalid-feedback">Please enter a totalAmount.</div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="senderName"  class="form-label">Expediteur</label>
+            <input type="text" 
+            [class.is-invalid]='addForm.get("senderName")?.errors && addForm.get("senderName")?.touched'
+            class="form-control" id="senderName" formControlName="senderName" placeholder="senderName">
+            <div class="invalid-feedback">Please entrer un expiditeur.</div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="senderCityId" class="form-label">City Expedicteur</label>
+            <select [class.is-invalid]='addForm.get("senderCityId")?.errors && addForm.get("senderCityId")?.touched' formControlName='senderCityId' class="form-select">
+              <option value="1">Lubumbashi</option>
+              <option value="1">Kolwezi</option>
+            </select>
+            <div class="invalid-feedback">Please choose a city</div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="recipientName"  class="form-label">Recepteur</label>
+            <input type="text" 
+            [class.is-invalid]='addForm.get("recipientName")?.errors && addForm.get("recipientName")?.touched'
+            class="form-control" id="recipientName" formControlName="recipientName" placeholder="recipientName">
+            <div class="invalid-feedback">Please entrer un recepteur.</div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="recipientCityId" class="form-label">City Recipient</label>
+            <select [class.is-invalid]='addForm.get("recipientCityId")?.errors && addForm.get("recipientCityId")?.touched' formControlName='recipientCityId' class="form-select">
+              <option value="1">Lubumbashi</option>
+              <option value="1">Kolwezi</option>
+            </select>
+            <div class="invalid-feedback">Please choose a city</div>
+          </div>
+
+        <div class="col-md-6">
+            <label for="code"  class="form-label">Code</label>
+            <input type="text" 
+            [class.is-invalid]='addForm.get("code")?.errors && addForm.get("code")?.touched'
+            class="form-control" id="code" formControlName="code" placeholder="code">
+            <div class="invalid-feedback">Please entrer un recepteur.</div>
+        </div>
+
+        <div class="col-md-6" hidden>
+            <input type="text" [(ngModel)]="user.id" formControlName='appUserId' class="form-control">
+        </div>
+
+        <div class="col-md-12">
+          <button type="submit" name="submit" id="submit" class="btn btn-primary ">Save</button>
+        </div>
+      </form>
+      </div>
+    </div>
+

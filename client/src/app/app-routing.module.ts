@@ -19,6 +19,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
+import { TransactionListComponent } from './transactions/transaction-list/transaction-list.component';
+import { TransactionAddComponent } from './transactions/transaction-add/transaction-add.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -35,8 +37,10 @@ const routes: Routes = [
       {path: 'lists', component: ListsComponent, canActivate: [AdminGuard]},
       {path: 'messages', component: MessagesComponent},
       {path: 'properties', component: PropertyListComponent, canActivate: [AdminGuard]},
+      {path: 'transactions', component: TransactionListComponent, canActivate: [AdminGuard]},
       {path: 'property/edit/:id', component: PropertyEditComponent, canDeactivate: [PreventUnsavedChangesGuard], canActivate: [AdminGuard]},
       {path: 'property/add', component: PropertyAddComponent, canActivate: [AdminGuard]},
+      {path: 'transaction/add', component: TransactionAddComponent, canActivate: [AdminGuard]},
       {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
     ]
   },

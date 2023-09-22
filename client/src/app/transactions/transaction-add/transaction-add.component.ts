@@ -2,22 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
-import { Property } from 'src/app/_models/property';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
-import { PropertiesService } from 'src/app/_services/properties.service';
 import { Router } from '@angular/router';
+import { Transaction } from 'src/app/_models/transaction';
+import { TransactionsService } from 'src/app/_services/transactions.service';
 
 @Component({
-  selector: 'app-property-add',
-  templateUrl: './property-add.component.html',
-  styleUrls: ['./property-add.component.css']
+  selector: 'app-transaction-add',
+  templateUrl: './transaction-add.component.html',
+  styleUrls: ['./transaction-add.component.css']
 })
-export class PropertyAddComponent implements OnInit {
+export class TransactionAddComponent implements OnInit {
 
   addForm: UntypedFormGroup;
   validationErrors: string[] = [];
-  property: Property;
+  transaction: Transaction;
   user: User;
   // @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
   //   if(this.addForm.dirty){
@@ -25,7 +25,7 @@ export class PropertyAddComponent implements OnInit {
   //   }
   // }
 
-  constructor(private acountService: AccountService, private propertyService: PropertiesService, 
+  constructor(private acountService: AccountService, private transactionsService: TransactionsService, 
     private toastr: ToastrService, private fb: UntypedFormBuilder, private router: Router) {
     this.acountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
    }
@@ -36,24 +36,25 @@ export class PropertyAddComponent implements OnInit {
 
   initializeForm(){
     this.addForm = this.fb.group({
-      price: ['', Validators.required],
-      bathRooms: ['', Validators.required],
-      bedRooms: ['', Validators.required],
-      garage: ['', Validators.required],
-      propertyType: ['', Validators.required],
-      description: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      youtubeLink: ['', Validators.nullValidator],
+      sentAmount: ['', Validators.required],
+      profit: ['', Validators.required],
+      totalAmount: ['', Validators.required],
+      senderName: ['', Validators.required],
+      senderCityId: ['', Validators.required],
+      recipientName: ['', Validators.required],
+      recipientCityId: ['', Validators.required],
+      code: ['', Validators.required],
+      statusId: ['1', Validators.required],
       appUserId: ['', Validators.required]
 
     })
   }
 
-  addProperty(){
-    this.propertyService.addProperty(this.addForm.value).subscribe(property => {
+  addTransaction(){
+    this.transactionsService.addTransaction(this.addForm.value).subscribe(transaction => {
       this.toastr.success("saved successfully");
-      this.router.navigateByUrl('/property/edit/' + property.id);
+      // this.router.navigateByUrl('/transaction/details/' + transaction.id);
+      this.router.navigateByUrl('/transactions');
     }, error => {
       this.validationErrors = error;
     });

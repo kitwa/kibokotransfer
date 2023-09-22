@@ -18,6 +18,7 @@ namespace API.DTOs
         public string Code { get; set; }
         public int StatusId { get; set; }
         public Status Status  { get; set; }
+        public MemberDto appUser {get; set; }
         public bool Deleted { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
     }

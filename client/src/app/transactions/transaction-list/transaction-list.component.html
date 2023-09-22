@@ -1,0 +1,64 @@
+  
+  <!-- <div class="row">
+    <div class="float-lg-end">
+        <button type="button" class="btn btn-outline-primary primary btn-sm" routerLink='/transaction/add'>Add Transaction</button>
+    </div>
+  </div> -->
+  
+  <div class="row">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">City</th>
+            <th scope="col">Montant Envoyer</th>
+            <th scope="col">Benefice</th>
+            <th scope="col">Montant Total</th>
+            <th scope="col">Expediteur</th>
+            <th scope="col">Recepteur</th>
+            <th scope="col">Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of transactions">
+            <th scope="row">{{ transaction.id }}</th>
+            <td>{{ transaction.appUser.city }}</td>
+            <td>{{ transaction.sentAmount }}</td>
+            <td>{{ transaction.profit }}</td>
+            <td>{{ transaction.totalAmount }}</td>
+            <td>{{ transaction.senderName }}</td>
+            <td>{{ transaction.recipientName }}</td>
+            <td>{{ transaction.code }}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  
+  <div class="d-flex justify-content-center pt-5" *ngIf="pagination && transactions.length > 0">
+    <pagination 
+    [boundaryLinks]="true" 
+    [itemsPerPage]="pagination.itemsPerPage" 
+    [totalItems]="pagination.totalItems" 
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;" 
+    nextText="&rsaquo;" 
+    firstText="&laquo;" 
+    lastText="&raquo;">
+  
+  </pagination>
+  </div>
+  
+  <div class="row" *ngIf="transactions.length == 0">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3 class="text-dark">0 Properties Found </h3>
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title">There is no property published yet.</h5>
+            </div>
+        </div>
+    </div>
+  </div>
+  
